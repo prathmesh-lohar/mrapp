@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %} {% endblock title %} {% block main %} {% load static %}
+
+
+<div id="conteudo">
+
+    <div class="conteudo-inner">
+        <div class="conteudo-wrapper">
+
+
+            <div class="cmr text-center">
+                <span class="fa fa-plus">Create New MR</span>
+            </div>
+            <h4>MR List</h4>
+
+
+
+
+            <div class="conteudo-box">
+                <div class="conteudo-boxInner">
+
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">MR id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td><a href="#"><span class="fa fa-pencil fa-lg"></span> </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
