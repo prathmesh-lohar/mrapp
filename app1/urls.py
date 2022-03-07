@@ -10,4 +10,5 @@ urlpatterns = [
     path("",views.dashboard, name="dashboard"),
     path('cmr', views.cmr, name="cmr"),
 
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -71,6 +71,15 @@ class visit(models.Model):
     time = models.TimeField()
     timestamp = models.DateTimeField()
     ppt_path = models.CharField(max_length=255)
+
+
+#for testing 
+
+
+class testing(models.Model):
+
+    name = models.CharField(max_length=255)
+    rollno = models.IntegerField()
     
     
     
