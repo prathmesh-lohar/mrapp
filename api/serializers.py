@@ -32,4 +32,11 @@ class testingSerializer(serializers.ModelSerializer):
         model = testing
         # fields = ['name', 'rollno']
         fields= "__all__"
+
+
+class mrloginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = mr_user
+        fields = ['user_name', 'first_name', 'last_name']
+
         

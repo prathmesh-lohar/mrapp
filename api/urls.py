@@ -24,6 +24,8 @@ urlpatterns = [
     path('visit/<int:id>',views.visitClassBassedView.as_view()),
 
 
+    path('mrlogin/<str:user_name>',views.mrloginClassBassedView.as_view()),
+
     # path('',include(router.urls)),
 
     # path('visit', views.visit_detail, name="visit"),

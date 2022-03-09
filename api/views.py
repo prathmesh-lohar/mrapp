@@ -183,8 +183,21 @@ class visitClassBassedView(APIView):
 
 
 
+class mrloginClassBassedView(APIView):
 
+    def get(self, request, user_name=None ,format=None):
+        if user_name is not None:
+            
+            try:
+                tt = mr_user.objects.get(user_name=user_name)
+            except:
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+        
+            return Response('user found', status=status.HTTP_201_CREATED)
 
+        # s = mrloginSerializer(tt,many=True)
+
+        # return Response(s.data, status=status.HTTP_200_OK)
 
 
 
