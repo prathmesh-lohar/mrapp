@@ -1,15 +1,15 @@
-import re
 from unicodedata import name
 from urllib import response
 from urllib.request import Request
 from django.shortcuts import render
 from app1.models import mr_user, visit,dr_user
-from app1.models import testing
+from app1.models import testing,slide
 
 from api.serializers import testingSerializer
 from api.serializers import mr_userSerializer
 from api.serializers import dr_userSerializer
 from api.serializers import visitSerializer
+from api.serializers import slideSerializer
 
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse
@@ -25,7 +25,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import json
+
 # Create your views here.
 
 
@@ -192,19 +192,34 @@ class mrloginClassBassedView(APIView):
             try:
                 tt = mr_user.objects.get(user_name=user_name, password=password)
             except:
-                response_data = {}
-                response_data['message'] = "user not found" 
-                return HttpResponse(json.dumps(response_data), content_type="application/json")
-                # return Response('no data found', status=status.HTTP_404_NOT_FOUND)
-
-            response_data = {}
-            response_data['message'] = "user found" 
-            return HttpResponse(json.dumps(response_data), content_type="application/json")
-            # return Response('user found', status=status.HTTP_201_CREATED)
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+        
+            return Response('user found', status=status.HTTP_201_CREATED)
 
         # s = mrloginSerializer(tt,many=True)
 
         # return Response(s.data, status=status.HTTP_200_OK)
+
+
+
+
+class slideClassBassedView(APIView):
+
+    def get(self, request, id=None ,format=None):
+        if id is not None:
+            
+            try:
+                tt = slide.objects.get(id=id)
+            except:
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+
+            s = slideSerializer(tt,many=False)
+
+            return Response(s.data, status=status.HTTP_200_OK)
+        tt= slide.objects.all()
+        s = slideSerializer(tt, many=True)
+        return Response(s.data, status=status.HTTP_200_OK)
+
 
 
 

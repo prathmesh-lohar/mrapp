@@ -23,6 +23,9 @@ urlpatterns = [
     path('visit',views.visitClassBassedView.as_view()),
     path('visit/<int:id>',views.visitClassBassedView.as_view()),
 
+    path('slide',views.slideClassBassedView.as_view()),
+    path('slide/<int:id>',views.slideClassBassedView.as_view()),
+
 
     path('mrlogin/<str:user_name>/<str:password>',views.mrloginClassBassedView.as_view()),
 

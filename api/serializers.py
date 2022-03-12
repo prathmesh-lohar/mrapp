@@ -6,6 +6,7 @@ from app1.models import visit
 from app1.models import testing
 from app1.models import mr_user
 from app1.models import dr_user
+from app1.models import slide
 
 
 
@@ -21,6 +22,14 @@ class dr_userSerializer(serializers.ModelSerializer):
         model = dr_user
         # fields = ['name', 'rollno']
         fields= "__all__"
+
+class slideSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = slide
+        # fields = ['name', 'rollno']
+        fields= "__all__"
+
+
 
 class visitSerializer(serializers.ModelSerializer):
     class Meta:
