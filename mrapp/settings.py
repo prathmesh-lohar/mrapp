@@ -89,22 +89,22 @@ WSGI_APPLICATION = 'mrapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mrapp',
-        'USER': 'pp',
-        'PASSWORD': 'xyz@123',
-        'HOST': '3.135.198.48'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'mrapp',
+#         'USER': 'pp',
+#         'PASSWORD': 'xyz@123',
+#         'HOST': '3.135.198.48'
+#     }
+# }
 
 
 # Password validation

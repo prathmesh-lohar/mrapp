@@ -428,8 +428,12 @@ input[type="submit"] {
 }
 
 #conteudo .conteudo-wrapper {
-    padding: 40px;
+    padding-top: 0px;
+    padding-left: 25px;
+    margin-top: -33px;
+
 }
+
 
 #conteudo .conteudo-box {
     background-color: #ffffff;
@@ -1599,3 +1603,4 @@ input[type="submit"] {
         width: 90%;
     }
 }
+

@@ -1,6 +1,8 @@
 import email
 import profile
 from time import time
+from unicodedata import category
+from urllib import request
 from django.db import models
 import datetime
 # Create your models here.
@@ -24,6 +26,8 @@ class mr_user(models.Model):
     longitude = models.FloatField(default=0)
     
     dob= models.DateField()
+
+    status = models.CharField(max_length=255, default="Active")
     
     
 class dr_user(models.Model):
@@ -80,6 +84,16 @@ class testing(models.Model):
 
     name = models.CharField(max_length=255)
     rollno = models.IntegerField()
+
+
+class slide(models.Model):
+
+    name = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
+    sub_category = models.CharField(max_length=255)
+    slide_pic = models.ImageField(upload_to="slides" , null=True,  blank=True)
+
+
     
     
     

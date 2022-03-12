@@ -13,7 +13,8 @@ class mr_userSerializer(serializers.ModelSerializer):
     class Meta:
         model = mr_user
         # fields = ['name', 'rollno']
-        fields= "__all__"
+        # fields= "__all__"
+        exclude = ('password',)
 
 class dr_userSerializer(serializers.ModelSerializer):
     class Meta:

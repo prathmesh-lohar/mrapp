@@ -1,3 +1,4 @@
+import re
 from unicodedata import name
 from urllib import response
 from urllib.request import Request
@@ -24,7 +25,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
+import json
 # Create your views here.
 
 
@@ -191,9 +192,15 @@ class mrloginClassBassedView(APIView):
             try:
                 tt = mr_user.objects.get(user_name=user_name, password=password)
             except:
-                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
-        
-            return Response('user found', status=status.HTTP_201_CREATED)
+                response_data = {}
+                response_data['message'] = "user not found" 
+                return HttpResponse(json.dumps(response_data), content_type="application/json")
+                # return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+
+            response_data = {}
+            response_data['message'] = "user found" 
+            return HttpResponse(json.dumps(response_data), content_type="application/json")
+            # return Response('user found', status=status.HTTP_201_CREATED)
 
         # s = mrloginSerializer(tt,many=True)
 

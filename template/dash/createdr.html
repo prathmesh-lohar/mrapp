@@ -1,0 +1,132 @@
+{% extends "base.html" %} {% block title %} {% endblock title %} {% block main %} {% load static %}
+
+<div id="conteudo">
+
+  <div class="conteudo-inner">
+      <div class="conteudo-wrapper">
+
+
+
+          <div class="conteudo-box">
+              <div class="conteudo-boxInner">
+    
+                <h5>Create New Doctor</h5>
+
+                <div class="form my-3">
+                  <form action="/create_dr" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                      <div class="col">
+                        <input required type="text" class="form-control" placeholder="Hospital Name" name="hospital_name">
+                      </div>
+                      <div class="col">
+                        <input required type="email" class="form-control" placeholder="email" name="email">
+                      </div>
+                    </div>
+
+                    <div class="row my-2">
+                      <div class="col">
+                        <input required type="text" class="form-control" placeholder="First Name" name="fname">
+                      </div>
+                      <div class="col">
+                        <input  required type="text" class="form-control" placeholder="Last Name" name="lname">
+                      </div>
+                    </div>
+
+
+                    <div class="row my-2">
+                      
+                        <div class="col">
+                          <input  required type="text" class="form-control my-3" placeholder="Mr User Name" name="user_name">
+                        </div>
+
+                        <div class="col">
+                            <label for="formFileSm" class="form-label">Upload Profile Pic</label>
+                            <input required class="form-control form-control-sm" id="formFileSm" type="file" name="profile">
+                        </div>
+                      </div>
+
+
+         
+
+
+                    
+                    <div class="row my-2">
+                      <div class="col text-center ">
+                        <button type="button" onclick="getLocation()" class="btn btn-info text-white w-100 rounded-0"><span class="fa fa-map-marker"> </span> Get Location</button>
+                      </div>
+                      <div class="col">
+                        <input required type="text" class="form-control" placeholder="lattitude" name="lat" id="lat" >
+                      </div>
+                      <div class="col">
+                        <input required type="text"  class="form-control" placeholder="longitide" name="long" id="long">
+                      </div>
+                    </div>
+
+                    <div class="row">
+
+          
+                      <div class="col">
+                        <input required type="number" class="form-control" placeholder="Mobile" name="mobile">
+                      </div>
+                      <div class="col">
+                        <input required type="date" class="form-control" placeholder="Date Of Birth" name="dob">
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+          
+                        <div class="col">
+                          <input required type="text" class="form-control" placeholder="City" name="city">
+                        </div>
+                        <div class="col">
+                          <input required type="text" class="form-control" placeholder="Category" name="category">
+                        </div>
+                      </div>
+
+                    
+
+
+
+
+                  <script>
+                  var x = document.getElementById("lat");
+                  var y = document.getElementById("long");
+
+                  function getLocation() {
+                    if (navigator.geolocation) {
+                      navigator.geolocation.watchPosition(showPosition);
+                    } else { 
+                      x.innerHTML = "Geolocation is not supported by this browser.";
+                    }
+                  }
+                      
+                  function showPosition(position) {
+                      x.value=position.coords.latitude 
+                      y.value=position.coords.longitude 
+                      
+                  }
+                  </script>
+
+
+                    <a href="/dr_list">
+                    <button type="button" class="btn btn-danger my-2">Cancel</button>
+                    </a>
+
+                    <button type="submit" class="btn btn-success my-2">Save</button>
+
+                  </form>
+
+
+                </div>
+
+                </div>
+     
+        </div>
+</div>
+
+
+
+{% endblock %}
