@@ -21,13 +21,13 @@ class mr_user(models.Model):
     
     mobile = models.BigIntegerField()
     
-    latitude = models.FloatField(default=0)
-    
-    longitude = models.FloatField(default=0)
     
     dob= models.DateField()
 
     status = models.CharField(max_length=255, default="Active")
+
+    def __str__(self):
+        return self.user_name
     
     
 class dr_user(models.Model):
@@ -55,6 +55,9 @@ class dr_user(models.Model):
     city = models.CharField(max_length=255)
     
     mr_username = models.CharField(max_length=255, default="")
+
+    def __str__(self):
+        return self.first_name
     
     
     
@@ -73,8 +76,14 @@ class visit(models.Model):
     
     date = models.DateField()
     time = models.TimeField()
-    timestamp = models.DateTimeField()
+    timestamp = models.CharField(max_length=255, default="00-00-0000")
     ppt_path = models.CharField(max_length=255)
+
+    status = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.hospital_name
+    
 
 
 #for testing 
@@ -92,6 +101,9 @@ class slide(models.Model):
     category = models.CharField(max_length=255)
     sub_category = models.CharField(max_length=255)
     slide_pic = models.ImageField(upload_to="slides" , null=True,  blank=True)
+
+    def __str__(self):
+        return self.name
 
 
     

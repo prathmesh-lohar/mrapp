@@ -47,6 +47,6 @@ class testingSerializer(serializers.ModelSerializer):
 class mrloginSerializer(serializers.ModelSerializer):
     class Meta:
         model = mr_user
-        fields = ['user_name', 'first_name', 'last_name']
+        fields = ['user_name', 'first_name', 'last_name', 'profile_pic']
 
         

@@ -10,12 +10,13 @@ from api.serializers import mr_userSerializer
 from api.serializers import dr_userSerializer
 from api.serializers import visitSerializer
 from api.serializers import slideSerializer
-
+from api.serializers import mrloginSerializer
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse
 import io
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 from rest_framework import viewsets
 
@@ -192,13 +193,24 @@ class mrloginClassBassedView(APIView):
             try:
                 tt = mr_user.objects.get(user_name=user_name, password=password)
             except:
-                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
-        
-            return Response('user found', status=status.HTTP_201_CREATED)
+                response_data = {}
+                response_data['message'] = "user not found" 
+                return HttpResponse(json.dumps(response_data), content_type="application/json")
+                # return Response('no data found', status=status.HTTP_404_NOT_FOUND)
 
-        # s = mrloginSerializer(tt,many=True)
+            response_data = {}
+            response_data['message'] = "user found"
 
-        # return Response(s.data, status=status.HTTP_200_OK)
+            s = mrloginSerializer(tt,many=False)
+            
+
+
+            return Response(s.data, status=status.HTTP_200_OK)
+
+            # return HttpResponse(json.dumps(response_data), content_type="application/json")
+            # return Response('user found', status=status.HTTP_201_CREATED)
+
+
 
 
 

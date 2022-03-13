@@ -36,24 +36,11 @@
 
 
 
-                    <div class="mb-3">
-                      <label for="formFileSm" class="form-label">Upload Profile Pic</label>
-                      <input required class="form-control form-control-sm" id="formFileSm" type="file" name="profile" value="{{up.profile_pic}}">
-                    </div>
+
 
 
                     
-                    <div class="row my-2">
-                      <div class="col text-center ">
-                        <button type="button" onclick="getLocation()" class="btn btn-info text-white w-100 rounded-0"><span class="fa fa-map-marker"> </span> Get Location</button>
-                      </div>
-                      <div class="col">
-                        <input required type="text" class="form-control" placeholder="lattitude" name="lat" id="lat" value="{{up.latitude}}">
-                      </div>
-                      <div class="col">
-                        <input required type="text"  class="form-control" placeholder="longitide" name="long" id="long" value="{{up.longitude}}">
-                      </div>
-                    </div>
+        
 
                     <div class="row">
 
@@ -61,38 +48,8 @@
                       <div class="col">
                         <input required type="number" class="form-control" placeholder="Mobile" name="mobile" value="{{up.mobile}}">
                       </div>
-                      <div class="col">
-                        <input required type="date" class="form-control" placeholder="Date Of Birth"  name="dob" value="{{up.dob}}">
-                      </div>
-                     
-                    </div>
 
-          
-
-
-
-
-                  <script>
-                  var x = document.getElementById("lat");
-                  var y = document.getElementById("long");
-
-                  function getLocation() {
-                    if (navigator.geolocation) {
-                      navigator.geolocation.watchPosition(showPosition);
-                    } else { 
-                      x.innerHTML = "Geolocation is not supported by this browser.";
-                    }
-                  }
-                      
-                  function showPosition(position) {
-                      x.value=position.coords.latitude 
-                      y.value=position.coords.longitude 
-                      
-                  }
-                  </script>
-
-                  <div class="row my-2">
-                      <div class="col-3 my-2">
+                      <div class="col-3 ">
                         <select class="form-select form-control" aria-label="Default select example" name="status">
                             <option selected>Status</option>
                             <option value="Active">Active</option>
@@ -101,6 +58,18 @@
                           </select>
         
                       </div>
+  
+                     
+                    </div>
+
+          
+
+
+
+
+
+                  <div class="row my-2">
+                    
                       <div class="col-3">
                         <a href="/mrlist">
                             <button type="button" class="btn btn-danger my-2">Cancel</button>

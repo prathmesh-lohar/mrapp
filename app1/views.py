@@ -67,14 +67,13 @@ def create_mr(request):
         lname = request.POST.get('lname')
         mob = request.POST.get('mobile')
         dob = request.POST.get('dob')
-        lat = request.POST.get('lat')
-        long = request.POST.get('long')
+
         profile = request.FILES.get('profile')
 
         mobile = int(mob)
 
 
-        mr = mr_user(user_name=username, password=password, first_name=fname, last_name=lname, mobile=mobile, latitude=lat, longitude=long,dob=dob)
+        mr = mr_user(user_name=username, password=password, first_name=fname, last_name=lname, mobile=mobile, dob=dob,profile_pic=profile)
         mr.save()
         return redirect('/mrlist')
         
@@ -106,7 +105,7 @@ def update_mr(request,id):
 
         mobile = int(mob)
 
-        up = mr_user.objects.filter(id=id).update(user_name=username, password=password, first_name=fname, last_name=lname, mobile=mobile, latitude=lat, longitude=long,dob=dob, status=status)
+        up = mr_user.objects.filter(id=id).update(user_name=username, password=password, first_name=fname, last_name=lname, mobile=mobile,  status=status)
 
         return redirect('/mrlist')
 
@@ -157,7 +156,7 @@ def create_dr(request):
         category = request.POST.get('category')
         latitude = request.POST.get('lat')
         longitude = request.POST.get('long')
-        profile_pic = request.POST.get('profile')
+        profile_pic = request.FILES.get('profile')
         city = request.POST.get('city')
         mr_username = request.POST.get('user_name')
 
@@ -190,16 +189,15 @@ def update_dr(request,id):
         hospital_name = request.POST.get('hospital_name')
         mob = request.POST.get('mobile')
         email = request.POST.get('email')
-        dob = request.POST.get('dob')
+      
         category = request.POST.get('category')
         latitude = request.POST.get('lat')
         longitude = request.POST.get('long')
-        profile_pic = request.POST.get('profile')
         city = request.POST.get('city')
         mr_username = request.POST.get('user_name')
         mobile = int(mob)
 
-        up = dr_user.objects.filter(id=id).update(first_name=first_name, last_name=last_name, hospital_name=hospital_name, mobile=mobile, email=email, dob=dob, category=category, latitude=latitude, longitude=longitude, profile_pic=profile_pic,city=city,mr_username=mr_username)
+        up = dr_user.objects.filter(id=id).update(first_name=first_name, last_name=last_name, hospital_name=hospital_name, mobile=mobile, email=email, category=category, latitude=latitude, longitude=longitude,city=city,mr_username=mr_username)
 
         return redirect('/dr_list')
 
