@@ -13,7 +13,7 @@ class mr_user(models.Model):
     
     password = models.CharField(max_length=500, default="")
     
-    profile_pic = models.CharField(max_length=255)
+    profile_pic = models.ImageField(upload_to="profiles" , null=True,  blank=True)
     
     first_name = models.CharField(max_length=255, default="")
     

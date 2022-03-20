@@ -17,7 +17,7 @@
 
                             <div class="col-md-4 px-0 mx-0 text-center my-2">
                                 <center>
-                                    <a href="/mrlist">
+                                    <a href="/mrlist" style="text-decoration: none;">
                                         <div class="card" style="width: 14rem;">
                                             <img class="card-img-top " src="{% static 'res/mr.jpg' %}" alt="icon">
                                             <div class="card-body">
@@ -32,7 +32,7 @@
 
                             <div class="col-md-4 px-0 mx-0  my-2">
                                 <center>
-                                    <a href="/dr_list">
+                                    <a href="/dr_list"  style="text-decoration: none;">
                                         <div class="card" style="width: 14rem;">
                                             <img class="card-img-top " src="{% static 'res/doc.jpg' %}" alt="icon">
                                             <div class="card-body">
@@ -61,7 +61,7 @@
 
                             <div class="col-md-4 text-center my-2">
                                 <center>
-                                    <a href="/add_slide">
+                                    <a href="/add_slide"  style="text-decoration: none;">
                                         <div class="card" style="width: 14rem;">
                                             <img class="card-img-top " src="{% static 'res/slide.png' %}" alt="icon">
                                             <div class="card-body">
@@ -76,7 +76,7 @@
 
                             <div class="col-md-4 my-2">
                                 <center>
-                                    <a href="/report">
+                                    <a href="/report"  style="text-decoration: none;">
                                         <div class="card" style="width: 14rem;">
                                             <img class="card-img-top " src="{% static 'res/rep.png' %}" alt="icon">
                                             <div class="card-body">
@@ -104,6 +104,15 @@
     .card{
     border-radius: 0px;
     border-color: green;
+    width: 14rem;
+    border-style: solid;
+    border-width: 5px;
+
 }
+
+.card:hover{
+    opacity: 0.7;
+}
+
 </style>
 {% endblock main %}
