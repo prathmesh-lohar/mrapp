@@ -26,6 +26,13 @@ urlpatterns = [
     path('slide',views.slideClassBassedView.as_view()),
     path('slide/<int:id>',views.slideClassBassedView.as_view()),
 
+    path('ppt',views.pptClassBassedView.as_view()),
+    path('ppt/<int:id>',views.pptClassBassedView.as_view()),
+    
+    path('ppt_filter/<str:category>',views.ppt_filterClassBassedView.as_view()),
+    
+
+
 
     path('mrlogin/<str:user_name>/<str:password>',views.mrloginClassBassedView.as_view()),
 

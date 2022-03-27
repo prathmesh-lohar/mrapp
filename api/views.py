@@ -3,14 +3,14 @@ from urllib import response
 from urllib.request import Request
 from django.shortcuts import render
 from app1.models import mr_user, visit,dr_user
-from app1.models import testing,slide
+from app1.models import testing,slide,ppt
 
 from api.serializers import testingSerializer
 from api.serializers import mr_userSerializer
 from api.serializers import dr_userSerializer
 from api.serializers import visitSerializer
 from api.serializers import slideSerializer
-from api.serializers import mrloginSerializer
+from api.serializers import mrloginSerializer,pptSerializer
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse
 import io
@@ -280,4 +280,81 @@ class testingClassBassedView(APIView):
             return Response("no data found ", status=status.HTTP_404_NOT_FOUND)
         tt.delete()
         return Response("deleted", status=status.HTTP_201_CREATED)
+
+
+
+
+class pptClassBassedView(APIView):
+
+    def get(self, request, category=None ,format=None, id=None):
+
+        if id is not None:
+            
+            try:
+                tt = ppt.objects.get(id=id)
+            except:
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+
+            s = pptSerializer(tt,many=False)
+
+
+
+
+            return Response(s.data, status=status.HTTP_200_OK)
+        tt= ppt.objects.all()
+        s = pptSerializer(tt, many=True)
+        return Response(s.data, status=status.HTTP_200_OK)
+
+    def post(self, request, id=None ,format=None,category=None):
+        s = pptSerializer(data=request.data)
+        if s.is_valid():
+            s.save()
+            return Response(s.data, status=status.HTTP_201_CREATED)
+
+        return Response(s.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    
+    def put(self, request, id=None ,format=None, category=None):
+        try:
+            tt=ppt.objects.get(id=id)
+        except:
+            return Response("no data found ", status=status.HTTP_404_NOT_FOUND)
+        s = pptSerializer(instance=tt, data=request.data)
+        if s.is_valid():
+            s.save()
+            return Response(s.data, status=status.HTTP_201_CREATED)
+        return Response(s.errors, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    
+    def delete(self, request, id=None ,format=None, category=None):
+        try:
+            tt= ppt.objects.get(id=id)
+        except:
+            return Response("no data found ", status=status.HTTP_404_NOT_FOUND)
+        tt.delete()
+        return Response("deleted", status=status.HTTP_201_CREATED)
+
+
+
+
+
+
+class ppt_filterClassBassedView(APIView):
+
+    def get(self, request, category=None ,format=None):
+
+        if category is not None:
+            
+            try:
+                tt = ppt.objects.filter(category=category)
+            except:
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+
+            s = pptSerializer(tt,many=True)
+
+
+            return Response(s.data, status=status.HTTP_200_OK)
+        # tt= ppt.objects.all()
+        # s = pptSerializer(tt, many=True)
+        # return Response(s.data, status=status.HTTP_200_OK)
 

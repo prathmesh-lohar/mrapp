@@ -48,8 +48,6 @@
           
 
               
-                      <p class="text-danger">Update Location Also By clicking get location <span class="text-success"> location:{{up.latitude}}, {{up.longitude}}</span></p>
-           
 
                     
                     <div class="row my-2">
@@ -78,7 +76,7 @@
                     </div>
 
 
-                    <div class="row">
+                    <div class="row my-2">
           
                         <div class="col">
                           <input required type="text" class="form-control" placeholder="City" name="city" value="{{up.city}}">
@@ -132,7 +130,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Drag Location</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -158,11 +156,20 @@
 
 <script>
 
+
+
         $(function() {
+
+            var lat = {{up.latitude}} ;
+            var long = {{up.longitude}} ;
+            console.log(lat)
+            console.log(long)
+
      
 
           $('#us2').locationpicker({
-          location: {latitude: 18.233747539216857, longitude: 75.69451256027808},   
+          // location: {latitude: 18.233747539216857, longitude: 75.69451256027808},  
+          location: {latitude: lat, longitude: long},   
           radius: 0,
           inputBinding: {
           latitudeInput: $('#lat'),

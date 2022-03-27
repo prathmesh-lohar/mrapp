@@ -30,9 +30,10 @@ urlpatterns = [
     path('delete_slide/<int:id>', views.delete_slide, name="delete_slide"),
 
 
+
     path('report',views.report, name="report"),
+    path('report_location/<int:id>',views.report_location, name="report_location"),
 
-
-
+ 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

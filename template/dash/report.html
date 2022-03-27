@@ -2,6 +2,114 @@
 
 {% block main %}
 
+
+<div class="container">
+
+  <div class="text-center">
+    <form class="forn-inline" action="/report" method="POST">
+      {% csrf_token %}
+      <div class="row">
+
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Mr Name/ Mr Username" aria-label="First name" name="mr">
+        </div>
+
+        <div class="col">
+          <input type="date" class="form-control" placeholder="Date" aria-label="First name" name="date">
+        </div>
+        <div class="col">
+          <input type="time" class="form-control" placeholder="Time" aria-label="Last name" name="time">
+        </div>
+
+        <div class="col">
+          <button class="btn btn-info form-control" type="submit">Submit</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+  
+  <table class="table table-hover my-4" style="    border-style: solid;
+  border-color: black;">
+    <thead>
+        <tr>
+            <th scope="col">Dr. Name </th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Mr</th>
+            <th scope="col">Status</th>
+            <th scope="col">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in visit %}
+          
+
+        <tr>
+            <th scope="row">{{i.doctor_first_name}}  {{i.doctor_last_name}}</th>
+            <td>{{i.date}}</td>
+            <td>{{i.time}}</td>
+            <td>{{i.mr_username}}</td>
+            <td>{{i.status}}
+            </td>
+            <td>
+            <a href="/report_location/{{i.id}}"><i class="material-icons btn"  style="font-size:30px; color: orange;">pin_drop</i> 
+            </a>
+            </td>
+
+            
+        </tr>
+
+     
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+</div>
+
+
+
+<!-- Modal -->
+
+ 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        
+
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <style>
+   .modal-backdrop {
+    z-index: -1;
+}
+ </style>
+
+
+
+
+
+
+
+
   <div id="container " style="width: 70%; margin-left: 20%;">
     <canvas id="population-chart" data-url="{% url 'report' %}"></canvas>
   </div>

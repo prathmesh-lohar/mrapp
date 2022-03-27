@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+  
+{% endblock title %}    
+
+{% block main %}
+
+<p>{{loc.hospital_name}}
+</p>
+
+<button onclick="history.back()" class="btn btn-info btn-sm" style="    float: right;
+margin-top: -42px;">Go Back</button>
+
+<div id="us2" style="width: 100%; height: 400px;"></div> 
+
+<script>
+
+
+
+    $(function() {
+
+
+        var lat = {{loc.latitude}};
+        var long = {{loc.longitude}};
+        console.log(lat)
+        console.log(long)
+
+ 
+
+      $('#us2').locationpicker({
+      // location: {latitude: 18.233747539216857, longitude: 75.69451256027808},  
+      location: {latitude: lat, longitude: long},   
+      radius: 0,
+      inputBinding: {
+      latitudeInput: $('#lat'),
+      longitudeInput: $('#lng'),
+      locationNameInput: $('#location')
+      },
+      enableAutocomplete: true,
+      onchanged: function(currentLocation, radius, isMarkerDropped) {
+      alert("Location changed. New location (" + currentLocation.latitude + ", " + currentLocation.longitude + ")");
+      }
+      });
+
+
+  });
+
+</script>
+
+
+{% endblock main %}
+
+    
