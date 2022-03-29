@@ -36,6 +36,9 @@ urlpatterns = [
 
     path('mrlogin/<str:user_name>/<str:password>',views.mrloginClassBassedView.as_view()),
 
+    path('mr_visit/<str:mr_username>',views.visit_mrClassBassedView.as_view()),
+
+
     # path('',include(router.urls)),
 
     # path('visit', views.visit_detail, name="visit"),

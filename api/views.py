@@ -10,7 +10,7 @@ from api.serializers import mr_userSerializer
 from api.serializers import dr_userSerializer
 from api.serializers import visitSerializer
 from api.serializers import slideSerializer
-from api.serializers import mrloginSerializer,pptSerializer
+from api.serializers import mrloginSerializer,pptSerializer,visit_mrSerializer
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse
 import io
@@ -351,6 +351,26 @@ class ppt_filterClassBassedView(APIView):
                 return Response('no data found', status=status.HTTP_404_NOT_FOUND)
 
             s = pptSerializer(tt,many=True)
+
+
+            return Response(s.data, status=status.HTTP_200_OK)
+        # tt= ppt.objects.all()
+        # s = pptSerializer(tt, many=True)
+        # return Response(s.data, status=status.HTTP_200_OK)
+
+
+class visit_mrClassBassedView(APIView):
+
+    def get(self, request, mr_username=None ,format=None):
+
+        if mr_username is not None:
+            
+            try:
+                tt = visit.objects.filter(mr_username=mr_username)
+            except:
+                return Response('no data found', status=status.HTTP_404_NOT_FOUND)
+
+            s = visit_mrSerializer(tt,many=True)
 
 
             return Response(s.data, status=status.HTTP_200_OK)

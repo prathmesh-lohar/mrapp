@@ -32,6 +32,9 @@ urlpatterns = [
 
 
     path('report',views.report, name="report"),
+    path('genrate_report',views.genrate_report, name="genrate_report"),
+
+    
     path('report_location/<int:id>',views.report_location, name="report_location"),
 
  

@@ -1,4 +1,5 @@
 from cmath import log, pi
+from datetime import date
 import re
 from telnetlib import STATUS
 from traceback import print_tb
@@ -301,7 +302,7 @@ def delete_slide(request,id):
 
 
 
-
+@login_required(login_url='/login')
 
 def report(request):
 
@@ -309,11 +310,9 @@ def report(request):
 
     if request.method == "POST":
         mr = request.POST.get('mr')
-        date = request.POST.get('date')
-        time =  request.POST.get('time')
 
-        print(date)
-        
+
+    
        
         visit = visit.objects.filter(mr_username=mr)
 
@@ -322,9 +321,6 @@ def report(request):
     else:
 
         visit = visit.objects.all()
-
-
-  
 
 
     return render(request, 'dash/report.html', {
@@ -340,3 +336,59 @@ def report_location(request, id):
     print(loc)
 
     return render(request, 'dash/report_location.html',{'loc':loc})
+
+
+def genrate_report(request):
+    if request.method == "POST":
+        mr = request.POST.get('mr')
+        fdate = request.POST.get('fdate')
+        tdate = request.POST.get('tdate')
+
+        # f = visit.objects.filter(Q(date__gte=fdate)&Q(date__lte=tdate))
+
+        from app1.models import visit
+        
+        data = []
+        label = []
+        can =[]
+        tot = []
+
+        visit = visit.objects.filter(Q(mr_username=mr) & Q(date__range=[fdate, tdate]))
+
+        for status in visit:
+
+            tot.append(status.status)
+        
+            if status.status == 'completed':
+               
+                data.append(status.status)
+
+                print(data)
+                
+            if status.status == 'pending':
+                label.append(status.date)
+                print(label)
+            if status.status == 'canceled':
+                can.append(status.date)
+                print(label)
+
+        completed = len(data)
+        pending = len(label)
+        canceled = len(can)
+        total = len(tot)
+
+        print(completed)
+        print(pending)
+        print(canceled)
+        print(total)
+
+        data ={
+            'visit':visit,
+            'completed':completed,
+            'pending':pending,
+            'canceled':canceled,
+            'total':total
+
+        }
+
+    return render(request, "dash/genrate_report.html", data)

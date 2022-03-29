@@ -58,4 +58,10 @@ class pptSerializer(serializers.ModelSerializer):
         fields= "__all__"
 
 
+class visit_mrSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = visit
+        # fields = ['name', 'rollno']
+        fields= "__all__"
+
         

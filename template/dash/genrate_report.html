@@ -3,6 +3,87 @@
 {% block main %}
 
 
+
+
+<div class="container text-center">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+    <canvas id="myChart" style="width:100%;max-width:750px"></canvas>
+    
+    <script>
+    var xValues = ["completed", "pending", "canceled", "total"];
+    var yValues = [{{completed}}, {{pending}}, {{canceled}}, {{total}}];
+    var barColors = [
+      "#009720",
+      "#ffb100",
+      "#ff0000",
+      "#00C5CD"
+    ];
+    
+    new Chart("myChart", {
+      type: "pie",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "visit report"
+        }
+      }
+    });
+    </script>
+    
+
+
+</div>
+
+<br>
+
+<div class="container text-center">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+        <canvas id="barChart" style="width:100%;max-width:750px"></canvas>
+        
+        <script>
+        var xValues =  ["completed", "pending", "canceled", "total"];
+        var yValues = [{{completed}}, {{pending}}, {{canceled}}, {{total}}];
+        var barColors = ["green", "orange","red","blue"];
+
+     
+        
+        new Chart("barChart", {
+          type: "bar",
+          data: {
+            labels: xValues,
+            datasets: [{
+              backgroundColor: barColors,
+              data: yValues
+            }]
+          },
+          options: {
+            legend: {display: false},
+            title: {
+              display: true,
+              text: "visit report"
+            }
+          }
+        });
+        </script>
+    
+
+</div>
+
+<br>
+<br>
+
+
 <div class="container">
 
   <div class="text-center">
@@ -87,30 +168,6 @@
 
 
 
-<!-- Modal -->
-
- 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        
-
-      </div>
-      <div class="modal-footer">
-       
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
  <style>
    .modal-backdrop {
@@ -131,44 +188,6 @@
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-  <script>
-
-    $(function () {
-
-      var $populationChart = $("#population-chart");
-      $.ajax({
-        url: $populationChart.data("url"),
-        success: function (data) {
-
-          var ctx = $populationChart[0].getContext("2d");
-
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: data.labels,
-              datasets: [{
-                label: 'Population',
-                backgroundColor: 'blue',
-                data: data.data
-              }]          
-            },
-            options: {
-              responsive: true,
-              legend: {
-                position: 'top',
-              },
-              title: {
-                display: true,
-                text: 'Population Bar Chart'
-              }
-            }
-          });
-
-        }
-      });
-
-    });
-
-  </script>
+  
 
 {% endblock %}
