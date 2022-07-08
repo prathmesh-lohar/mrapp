@@ -1,4 +1,5 @@
 from cmath import log, pi
+from datetime import date
 import re
 from telnetlib import STATUS
 from traceback import print_tb
@@ -71,6 +72,26 @@ def create_mr(request):
         profile = request.FILES.get('profile')
 
         mobile = int(mob)
+
+        # import boto3
+        # from botocore.client import Config
+
+        # ACCESS_KEY_ID = ''
+        # ACCESS_SECRET_KEY = ''
+        # BUCKET_NAME = 'mrappbucks'
+
+        # data = open(profile, 'rb')
+
+        # s3 = boto3.resource(
+        #     's3',
+        #     aws_access_key_id=ACCESS_KEY_ID,
+        #     aws_secret_access_key=ACCESS_SECRET_KEY,
+        #     config=Config(signature_version='s3v4')
+        # )
+        # s3.Bucket(BUCKET_NAME).put_object(Key=profile, Body=data)
+
+        # print ("Done")
+
 
 
         mr = mr_user(user_name=username, password=password, first_name=fname, last_name=lname, mobile=mobile, dob=dob,profile_pic=profile)
@@ -165,6 +186,8 @@ def create_dr(request):
         mobile = int(mob)
 
 
+ 
+
         dr = dr_user(first_name=first_name, last_name=last_name, hospital_name=hospital_name, mobile=mobile, email=email, dob=dob, category=category, latitude=latitude, longitude=longitude, profile_pic=profile_pic,city=city,mr_username=mr_username)
         dr.save()
         return redirect('/dr_list')
@@ -196,6 +219,8 @@ def update_dr(request,id):
         city = request.POST.get('city')
         mr_username = request.POST.get('user_name')
         mobile = int(mob)
+
+  
 
         up = dr_user.objects.filter(id=id).update(first_name=first_name, last_name=last_name, hospital_name=hospital_name, mobile=mobile, email=email, category=category, latitude=latitude, longitude=longitude,city=city,mr_username=mr_username)
 
@@ -276,19 +301,94 @@ def delete_slide(request,id):
 
 
 
-from django.shortcuts import render
-from app1.models import mr_user,visit
+
+@login_required(login_url='/login')
 
 def report(request):
-    labels = []
-    data = []
 
-    queryset = visit.objects.order_by('-hospital_name')[:5]
-    for city in queryset:
-        labels.append(visit.hospital_name)
-        data.append(visit.mr_username)
+    from app1.models import visit
+
+    if request.method == "POST":
+        mr = request.POST.get('mr')
+
+
+    
+       
+        visit = visit.objects.filter(mr_username=mr)
+
+        
+    #     visit = visit.objects.filter(date=date)
+    else:
+
+        visit = visit.objects.all()
+
 
     return render(request, 'dash/report.html', {
-        'labels': labels,
-        'data': data,
+
+        'visit':visit,
     })
+
+
+def report_location(request, id):
+
+
+    loc = visit.objects.filter(id=id)[0]
+    print(loc)
+
+    return render(request, 'dash/report_location.html',{'loc':loc})
+
+
+def genrate_report(request):
+    if request.method == "POST":
+        mr = request.POST.get('mr')
+        fdate = request.POST.get('fdate')
+        tdate = request.POST.get('tdate')
+
+        # f = visit.objects.filter(Q(date__gte=fdate)&Q(date__lte=tdate))
+
+        from app1.models import visit
+        
+        data = []
+        label = []
+        can =[]
+        tot = []
+
+        visit = visit.objects.filter(Q(mr_username=mr) & Q(date__range=[fdate, tdate]))
+
+        for status in visit:
+
+            tot.append(status.status)
+        
+            if status.status == 'completed':
+               
+                data.append(status.status)
+
+                print(data)
+                
+            if status.status == 'pending':
+                label.append(status.date)
+                print(label)
+            if status.status == 'canceled':
+                can.append(status.date)
+                print(label)
+
+        completed = len(data)
+        pending = len(label)
+        canceled = len(can)
+        total = len(tot)
+
+        print(completed)
+        print(pending)
+        print(canceled)
+        print(total)
+
+        data ={
+            'visit':visit,
+            'completed':completed,
+            'pending':pending,
+            'canceled':canceled,
+            'total':total
+
+        }
+
+    return render(request, "dash/genrate_report.html", data)
