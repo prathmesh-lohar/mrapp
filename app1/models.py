@@ -95,6 +95,7 @@ class testing(models.Model):
     rollno = models.IntegerField()
 
 
+
 class slide(models.Model):
 
     name = models.CharField(max_length=255)
@@ -102,19 +103,19 @@ class slide(models.Model):
     sub_category = models.CharField(max_length=255)
     slide_pic = models.ImageField(upload_to="slides" , null=True,  blank=True)
 
+
     def __str__(self):
         return self.name
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+class ppt(models.Model):
+
+    ppt_name = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
+    ppt_slides = models.CharField(max_length=255)
+
+
+
+    def __str__(self):
+        return self.ppt_name
